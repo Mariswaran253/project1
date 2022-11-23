@@ -3,11 +3,20 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const url = require("url");
+const { exec } = require('child_process');
 // const { exec } = require('child_process');
-// const getDiffError = require('./tools/getDiffError');
+const getDiff = require('./tools/getDiffError');
 var connect = require("connect");
 
-var server = http.createServer(function (req, res) { 
+var temp = 'run';
+exec('git branch --show-current', (err, stdout, stderr) => {
+    if (err) {
+        // handle your error
+    }
+    temp = stdout
+});
+
+var server = http.createServer(function (req, res, temp) { 
     const parsedURL = url.parse(req.url, true);
     if (parsedURL.pathname == '/data') {
         var queryObject = parsedURL.query;
@@ -23,6 +32,7 @@ var server = http.createServer(function (req, res) {
         var filePath = parsedURL.pathname == '/' ? '../master/test1.js' : '../master/test2.js'+parsedURL.pathname
         var extname = path.extname(filePath);
         var contentType = 'text/html'; //no i18n
+        
         switch (extname) {
             case '.js':
                 contentType = 'text/javascript'; //no i18n
@@ -46,7 +56,7 @@ var server = http.createServer(function (req, res) {
                 contentType = 'image/svg'; //no i18n
                 break;
         }
-        fs.readFile(filePath, function(error, content) {
+        fs.readFile(filePath, function(error, content, temp) {
             if (error) {
                 if(error.code == 'ENOENT'){
                     res.writeHead(200, { 'Content-Type': contentType }); //no i18n
@@ -59,8 +69,12 @@ var server = http.createServer(function (req, res) {
                 }
             }
             else {
-                res.writeHead(200, { 'Content-Type': contentType }); //no i18n
-                res.end(content, 'utf-8'); //no i18n
+                res.writeHead(200, { 'Content-Type': "text/html" }); //no i18n
+                res.write("<div>");
+                
+                res.write("<input type='text' placeholder='From Branch...' value='"+temp+"' >");
+                res.write(content+"</div>", 'utf-8'); //no i18n
+                res.end();
             }
         });
     }
