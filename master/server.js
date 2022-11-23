@@ -5,7 +5,7 @@ const path = require("path");
 const url = require("url");
 const { exec } = require('child_process');
 // const { exec } = require('child_process');
-const getDiff = require('./tools/getDiffError');
+const getDiff = require('./tools/getDiff');
 var connect = require("connect");
 
 var temp = 'run';
