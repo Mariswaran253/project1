@@ -4,12 +4,13 @@ module.exports = {
     execute : (fBranch,tBranch,pathdir)=>{
         return new Promise((resolve,reject) => {
             var fromBranch = fBranch ? fBranch : 'master'; //no i18n
+            var toBranch = tBranch ? tBranch : 'TESTBRANCH';
             // var toBranch = tBranch ? tBranch : 'ZOHOCRM_MASSTOOLS_LIST_BRANCH' //no i18n
-            var toBranch = tBranch ? tBranch : 'TESTBRANCH'
             var filesdiff = `git diff --name-only origin/${fromBranch} origin/${toBranch}`
             var singleFileDIff = `git diff --ignore-blank-lines -b -w -U origin/${fromBranch} origin/${toBranch} --`
             if(!pathdir){
-                pathdir = `\\Users\\mari-pt6431\\Desktop\\App\\gitApp\\project1` 
+                // pathdir = `C:\\Users\\test\\audit tool\\gitCrmRepo\\zohocrm` 
+                pathdir = "/Users/mari-pt6431/Desktop/App/gitApp/project1"
                 // pathdir = "/Users/naveen-6833/Documents/ZohoCrmRepo/zohocrm" //no i18n
             }
             //check helper
