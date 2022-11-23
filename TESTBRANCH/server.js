@@ -29,7 +29,7 @@ var server = http.createServer(function (req, res, temp) {
         });
     }
     else{
-        var filePath = parsedURL.pathname == '/' ? '../master/test1.js' : '../master/test2.js'+parsedURL.pathname
+        var filePath = parsedURL.pathname == '/' ? '../TESTBRANCH/test1.js' : '../TESTBRANCH/test2.js'+parsedURL.pathname
         var extname = path.extname(filePath);
         var contentType = 'text/html'; //no i18n
         
