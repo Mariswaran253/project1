@@ -6,7 +6,8 @@ var ignoreList = [
     'crmui.showMsgBand', //no i18n
     'lyte-dropdown', //no i18n
     'crmui.showTooltip', //no i18n
-    'networkUtils.makeRequest' //no i18n
+    'networkUtils.makeRequest', //no i18n
+    'crmRequestPool'
 ]
 var printN= {};
 var ignoredFilesList;
