@@ -1,3 +1,12 @@
+var ignoreList = [
+    '[$][(]',
+    'networkUtils.makeRequest', //no i18n
+    'networkUtils.lyteInitiateRequest', //no i18n
+    'crmRequestPool', //no i18n
+    'crmui.showMsgBand', //no i18n
+    'lyte-dropdown', //no i18n
+    'crmui.showTooltip' //no i18n
+]
 var printN= {};
 var ignoredFilesList;
 exec(`cd ${pathdir} && git pull`, { maxBuffer: 2e+7 }, async (error, stdout, stderr) =>{
